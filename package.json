@@ -8,7 +8,10 @@
     "test": "truffle test"
   },
   "dependencies": {
+    "bn-chai": "^1.0.1",
+    "chai": "^4.2.0",
     "openzeppelin-solidity": "^2.2.0",
+    "openzeppelin-test-helpers": "^0.4.2",
     "truffle": "^5.0.13"
   }
 }

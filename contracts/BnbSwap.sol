@@ -4,10 +4,27 @@ import "openzeppelin-solidity/contracts/ownership/Ownable.sol";
 import "./IERC20.sol";
 
 
+interface Transferable {
+    function balanceOf(address who) external view returns (uint);
+    function transfer(address to, uint tokens) external returns (bool success);
+}
+
 contract BnbSwap is Ownable {
+
+    Transferable public transToken;
+
     mapping (address => string) public registers;
 
     event Put(address indexed eth, string indexed bnb);
+
+    constructor(Transferable _transToken) public {
+        transToken = _transToken;
+    }
+
+    function burn() external {
+        uint balance = transToken.balanceOf(address(this));
+        transToken.transfer(address(0), balance);
+    }
 
     function put(string calldata _bnb) external {
         require(bytes(registers[msg.sender]).length == 0, "Already registered");
