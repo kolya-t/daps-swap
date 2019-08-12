@@ -15,7 +15,7 @@ contract DAPSSwap is Ownable {
 
     mapping(address => string) public registers;
 
-    event Put(address indexed eth, string indexed bnb);
+    event Put(address indexed eth, string indexed daps);
 
     constructor(Transferable _transToken) public {
         transToken = _transToken;
@@ -26,10 +26,10 @@ contract DAPSSwap is Ownable {
         transToken.transfer(address(0), balance);
     }
 
-    function put(string calldata _bnb) external {
+    function put(string calldata _daps) external {
         require(bytes(registers[msg.sender]).length == 0, "Already registered");
-        registers[msg.sender] = _bnb;
-        emit Put(msg.sender, _bnb);
+        registers[msg.sender] = _daps;
+        emit Put(msg.sender, _daps);
     }
 
     function transfer(IERC20 _token, address _to, uint256 _value)
