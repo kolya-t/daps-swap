@@ -4,8 +4,9 @@ require("dotenv").config();
 module.exports = {
   networks: {
     ropsten: {
-      provider: () => new HDWalletProvider([process.env.PK], `https://ropsten.infura.io/${process.env.INFURA_KEY}`),
-      network_id: 3
+      provider: () => new HDWalletProvider([process.env.PK], `https://ropsten.infura.io/v3/${process.env.INFURA_KEY}`),
+      network_id: 3,
+      skipDryRun: true
     }
   },
 
