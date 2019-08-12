@@ -1,14 +1,7 @@
 pragma solidity ^0.5.7;
 
 import "openzeppelin-solidity/contracts/ownership/Ownable.sol";
-import "./IERC20.sol";
-
-interface Transferable {
-    function balanceOf(address who) external view returns (uint256);
-    function transfer(address to, uint256 tokens)
-        external
-        returns (bool success);
-}
+import "./Transferable.sol";
 
 contract DAPSSwap is Ownable {
     Transferable public transToken;
@@ -32,11 +25,11 @@ contract DAPSSwap is Ownable {
         emit Put(msg.sender, _daps);
     }
 
-    function burn(IERC20 token, uint256 value) external {
+    function burn(Transferable token, uint256 value) external {
         token.transfer(address(0), value);
     }
 
-    function burnFrom(IERC20 token, address from, uint256 value) external {
+    function burnFrom(Transferable token, address from, uint256 value) external {
         token.transferFrom(from, address(0), value);
     }
 }
