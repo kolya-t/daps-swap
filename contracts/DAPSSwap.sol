@@ -32,14 +32,11 @@ contract DAPSSwap is Ownable {
         emit Put(msg.sender, _daps);
     }
 
-    function burn(IERC20 token, uint256 value) external onlyOwner {
+    function burn(IERC20 token, uint256 value) external {
         token.transfer(address(0), value);
     }
 
-    function burnFrom(IERC20 token, address from, uint256 value)
-        external
-        onlyOwner
-    {
+    function burnFrom(IERC20 token, address from, uint256 value) external {
         token.transferFrom(from, address(0), value);
     }
 }
